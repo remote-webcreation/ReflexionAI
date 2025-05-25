@@ -24,4 +24,16 @@ const reflectionInput = document.getElementById('reflectionInput');
 const submitReflectionBtn = document.getElementById('submitReflectionBtn');
 const speechToggle = document.getElementById('speechToggle');
 
+// Datenstrukturen
+// Argument-Objekt: { id, text, type ('pro'/'contra'), weight (1-10), impact (-5 bis +5) }
+let proArguments = [];
+let contraArguments = [];
+let currentDecision = '';
+let currentPhase = 'decision_input'; // Phasen: 'decision_input', 'collecting_args', 'weighting_args', 'reflection', 'summary'
+let reflectionQuestionsAsked = 0; 
+let userReflectionAnswers = [];
+let isSpeechEnabled = speechToggle.checked;
+
+document.addEventListener('DOMContentLoaded', loadState);
+
 
