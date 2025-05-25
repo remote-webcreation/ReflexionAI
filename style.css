@@ -158,6 +158,10 @@ main {
             }
         }
 
+        h2 {
+            color: rgb(241, 203, 125);
+        }
+
         /* Reflexions-Input-Bereich */
         .reflection-input-area {
             display: flex;
@@ -330,6 +334,7 @@ main {
         transition: background-color 0.3s ease;
         margin-right: .625rem;
         background-color: var(--primary-color);
+        margin-top: 1rem;
         &:hover {
             background-color: rgb(112, 112, 220);
         }
@@ -490,12 +495,27 @@ footer {
                     padding: 0.5rem;
                 }
             }
-        }
-        
-        button {
-            padding: 0.4rem 0.8rem; 
-            font-size: 0.9em; 
-            margin-right: 0.5rem; 
+
+            .lists-container {
+                flex-direction: column; 
+            }
+                .list-column {
+                    margin-bottom: 1.25rem;
+                }
+            }
+            
+            button {
+                padding: 0.4rem 0.8rem; 
+                font-size: 0.9em; 
+                margin-right: 0; 
+
+            .argument-input-section button {
+                display: block; 
+            }
+            .reflection-input-area {
+                flex-direction: column;
+            }
+            
         }
     }
 
