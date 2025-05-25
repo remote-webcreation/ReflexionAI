@@ -46,3 +46,23 @@ speechToggle.addEventListener('change', () => {
     isSpeechEnabled = speechToggle.checked;
     agentSays(`Sprachausgabe ${isSpeechEnabled ? 'aktiviert' : 'deaktiviert'}.`);
 });
+
+
+// Listener für Enter-Taste in Input-Feld.
+decisionInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') setDecision();
+});
+argumentText.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        if (addProBtn.classList.contains('active')) { 
+            addArgument('pro');
+        } else if (addContraBtn.classList.contains('active')) { 
+            addArgument('contra');
+        } else { 
+            addArgument('pro');
+        }
+    }
+});
+reflectionInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') submitReflectionAnswer();
+});
