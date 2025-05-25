@@ -36,4 +36,13 @@ let isSpeechEnabled = speechToggle.checked;
 
 document.addEventListener('DOMContentLoaded', loadState);
 
-
+// Event Listener für Buttons
+setDecisionBtn.addEventListener('click', setDecision);
+addProBtn.addEventListener('click', () => addArgument('pro'));
+addContraBtn.addEventListener('click', () => addArgument('contra'));
+startReflectionBtn.addEventListener('click', startReflectionPhase);
+submitReflectionBtn.addEventListener('click', submitReflectionAnswer);
+speechToggle.addEventListener('change', () => {
+    isSpeechEnabled = speechToggle.checked;
+    agentSays(`Sprachausgabe ${isSpeechEnabled ? 'aktiviert' : 'deaktiviert'}.`);
+});
