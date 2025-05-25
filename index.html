@@ -9,14 +9,18 @@
 <body>
 
     <header>
-        <h1>ReflexionAI -
-            <span>Dein Entscheidungs Kompass</span>
-        </h1> 
-        <i class="fa-regular fa-compass"></i>
+        <a href="./">
+            <h1>ReflexionAI</h1>
+            <i class="fa-regular fa-compass"></i>
+        </a> 
+        <h2>Dein Entscheidungs Kompass</h2>
     </header>
 
     <main>
         <div class="container">
+
+            <h2>Kognitions-Coach</h2>
+
         
             <div class="section">
                 <h2>Worum geht es bei deiner Entscheidung?</h2>
@@ -45,12 +49,33 @@
                 </div>
             </div>
 
-            <div class="section feedback-section">
-                <h2>Was denkst du bisher?</h2>
-                <div id="agentChat" class="chat-window">
-                    <p class="agent-message">**Entscheidungs-Kompass:** Hallo! Erzähl mir, was dich beschäftigt.</p>
+            <div class="section" id="analysis-section">
+                <h2>Analyse & Reflexion</h2>
+                <div class="scores-display">
+                    <p>Pro-Score: <span id="proScore">0</span></p>
+                    <p>Contra-Score: <span id="contraScore">0</span></p>
+                    <p class="recommendation">Tendenz: <span id="overallRecommendation">Ausgeglichen</span></p>
                 </div>
+                <button id="startReflectionBtn" class="primary-btn">Starte die Reflexion</button>
+                <button id="showSummaryBtn" class="secondary-btn" style="display: none;">Zusammenfassung anzeigen</button>
             </div>
+
+            <div class="section chat-section">
+            <h2>Dein Kognitions-Coach</h2>
+            <div id="agentChat" class="chat-window">
+                <p class="agent-message agent-intro">
+                    **Kognitions-Coach:** Hallo! Ich helfe dir, deine Gedanken zu ordnen und fundierte Entscheidungen zu treffen. Beginne, indem du deine Entscheidung oben festlegst.
+                </p>
+            </div>
+            <div id="reflectionInputSection" class="reflection-input-area" style="display: none;">
+                <input type="text" id="reflectionInput" placeholder="Deine Antwort hier eingeben..." aria-label="Antwort auf Reflexionsfrage">
+                <button id="submitReflectionBtn">Antwort senden</button>
+            </div>
+            <div class="speech-controls">
+                <label for="speechToggle">Sprachausgabe des Agenten:</label>
+                <input type="checkbox" id="speechToggle" checked>
+            </div>
+        </div>
         </div>
     </main>
 
