@@ -18,42 +18,47 @@
     <main>
         <div class="container">
         
-        <div class="section">
-            <h2>Worum geht es bei deiner Entscheidung?</h2>
-            <input type="text" id="decisionInput" placeholder="Z.B. Soll ich den Job wechseln?" aria-label="Deine Entscheidung">
-            <button id="setDecisionBtn">Entscheidung festlegen</button>
-            <p id="currentDecision" class="decision-display"></p>
-        </div>
+            <div class="section">
+                <h2>Worum geht es bei deiner Entscheidung?</h2>
+                <input type="text" id="decisionInput" placeholder="Z.B. Soll ich den Job wechseln?" aria-label="Deine Entscheidung">
+                <button id="setDecisionBtn">Entscheidung festlegen</button>
+                <p id="currentDecision" class="decision-display"></p>
+            </div>
 
-        <div class="argument-input-section section">
-            <h2>Pro- & Contra-Argumente</h2>
-            <input type="text" id="argumentText" placeholder="Argument hier eingeben..." aria-label="Argument">
-            <button id="addProBtn" class="pro-btn">Pro hinzufügen</button>
-            <button id="addContraBtn" class="contra-btn">Contra hinzufügen</button>
-        </div>
+            <div class="argument-input-section section">
+                <h2>Pro- & Contra-Argumente</h2>
+                <input type="text" id="argumentText" placeholder="Argument hier eingeben..." aria-label="Argument">
+                <button id="addProBtn" class="pro-btn">Pro hinzufügen</button>
+                <button id="addContraBtn" class="contra-btn">Contra hinzufügen</button>
+            </div>
 
-        <div class="lists-container section">
-            <div class="list-column pro-list-column">
-                <h3>Pro-Argumente (<span id="proCount">0</span>)</h3>
-                <ul id="proList" class="argument-list">
+            <div class="lists-container section">
+                <div class="list-column pro-list-column">
+                    <h3>Pro-Argumente (<span id="proCount">0</span>)</h3>
+                    <ul id="proList" class="argument-list">
                     </ul>
-            </div>
-            <div class="list-column contra-list-column">
-                <h3>Contra-Argumente (<span id="contraCount">0</span>)</h3>
-                <ul id="contraList" class="argument-list">
+                </div>
+                <div class="list-column contra-list-column">
+                    <h3>Contra-Argumente (<span id="contraCount">0</span>)</h3>
+                    <ul id="contraList" class="argument-list">
                     </ul>
+                </div>
             </div>
-        </div>
 
-        <div class="section feedback-section">
-            <h2>Was denkst du bisher?</h2>
-            <div id="agentChat" class="chat-window">
-                <p class="agent-message">**Entscheidungs-Kompass:** Hallo! Erzähl mir, was dich beschäftigt.</p>
+            <div class="section feedback-section">
+                <h2>Was denkst du bisher?</h2>
+                <div id="agentChat" class="chat-window">
+                    <p class="agent-message">**Entscheidungs-Kompass:** Hallo! Erzähl mir, was dich beschäftigt.</p>
+                </div>
             </div>
         </div>
-    </div>
     </main>
-    
+
+    <footer>
+        <p>© 2023 ReflexionAI. Alle Rechte vorbehalten.</p>
+        <p>Entwickelt von Remote-WebCREATION</p>
+    </footer>
+
     <script src="https://kit.fontawesome.com/3c5c346bdf.js" crossorigin="anonymous"></script>
     <script src="./script.js"></script>
 </body>

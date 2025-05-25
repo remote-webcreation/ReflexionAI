@@ -12,6 +12,7 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 *,
@@ -28,13 +29,15 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    margin: 0;
     width: 100vw;
     font-family: var(--font-family);
     background-color: var(--light-color);
     color: var(--dark-color);
     text-rendering: optimizeLegibility;
-    gap: 4rem;
+    gap: 1rem;
+    padding-bottom: 3.75rem;
     a {
       text-decoration: none;
       color: var(--light-color);
@@ -94,13 +97,17 @@ main {
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         max-width: 56.25rem;
         width: 100%;
-        margin-top: 4rem;
         .section {
             margin-bottom: 2rem;
             padding: 1.25rem;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             background-color: #fafafa;
+            transition: all 0.3s ease;
+            &:hover {
+                transform: scale(1.025);
+                background-color: rgb(243, 243, 254);
+            }
             input[type="text"] {
                 width: calc(100% - 22px); 
                 padding: .625rem;
@@ -154,6 +161,105 @@ main {
         }
         &:focus {
             box-shadow: 0px 0px 0px 3px rgba(240, 124, 111, 0.6), 0px 0px 10px rgba(240, 124, 111, 0.4);
+        }
+    }
+
+}
+
+footer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: .25rem;
+    background-color: rgb(16, 16, 16);
+    color: var(--light-color);
+    font-size: var(--font-size-small);
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    p {
+        margin: 0;
+    }
+}
+
+
+/* --- Media Queries --- */
+
+/* Tablet-QF & größere Smartphones */
+@media (max-width: 991px) {
+    body {
+        gap: 0.75rem;
+    }
+
+    main {
+        padding: 2rem; 
+        .container {
+            padding: 1.5rem; 
+            max-width: 45rem; 
+            .section {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 767px) {
+    body {
+        gap: 0.5rem; 
+    }
+
+    header {
+        padding: 1rem; 
+        font-size: var(--font-size); 
+        h1 {
+            font-size: 1.2em; 
+        }
+    }
+
+    main {
+        padding: 1.5rem; 
+        .container {
+            padding: 1rem; 
+            border-radius: 0; 
+            box-shadow: none; 
+            .section {
+                padding: 0.75rem; 
+                margin-bottom: 1rem; 
+                input[type="text"] {
+                    width: 100%; 
+                    padding: 0.5rem;
+                }
+            }
+        }
+        
+        button {
+            padding: 0.4rem 0.8rem; 
+            font-size: 0.9em; 
+            margin-right: 0.5rem; 
+        }
+    }
+
+    h1, h2, h3 {
+        margin-bottom: 1rem; 
+        font-size: 1.25rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: .5rem;
+        .container {
+            padding: 0.75rem;
+            .section {
+                padding: 0.5rem;
+            }
         }
     }
 }
