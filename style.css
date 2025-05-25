@@ -159,7 +159,7 @@ main {
         }
 
         h2 {
-            color: rgb(241, 203, 125);
+            color: rgb(165, 164, 164);
         }
 
         /* Reflexions-Input-Bereich */
@@ -294,7 +294,7 @@ main {
         box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
 
-    /* Anzeige der Scores */
+    /* Anzeige Scores */
     .scores-display {
         text-align: center;
         margin-top: 1.25rem;
@@ -315,7 +315,7 @@ main {
         .recommendation {
             font-size: 1.3em;
             font-weight: bold;
-            color: #27ae8c; /* Grün für positive Empfehlung */
+            color: rgb(151, 151, 238);
             margin-top: .9375rem;
         }
     }

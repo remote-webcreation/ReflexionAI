@@ -19,27 +19,27 @@
     <main>
         <div class="container">
 
-            <div class="section">
+            <div class="section" id="decision-section">
                 <h2>Worum geht es bei deiner Entscheidung?</h2>
                 <input type="text" id="decisionInput" placeholder="Z.B. Soll ich den Job wechseln?" aria-label="Deine Entscheidung">
                 <button id="setDecisionBtn">Entscheidung festlegen</button>
                 <p id="currentDecision" class="decision-display"></p>
             </div>
 
-            <div class="argument-input-section section">
+            <div class="argument-input-section section" id="argument-input-section">
                 <h2>Pro- & Contra-Argumente</h2>
                 <input type="text" id="argumentText" placeholder="Argument hier eingeben..." aria-label="Argument">
                 <button id="addProBtn" class="pro-btn">Pro hinzufügen</button>
                 <button id="addContraBtn" class="contra-btn">Contra hinzufügen</button>
             </div>
 
-            <div class="lists-container section">
+            <div class="lists-container section" id="argument-lists-section">
                 <div class="list-column pro-list-column">
                     <h3>Pro-Argumente (<span id="proCount">0</span>)</h3>
                     <ul id="proList" class="argument-list">
                     </ul>
                 </div>
-                <div class="list-column contra-list-column">
+                <div class="list-column contra-list-column" id="argument-lists-section">
                     <h3>Contra-Argumente (<span id="contraCount">0</span>)</h3>
                     <ul id="contraList" class="argument-list">
                     </ul>
