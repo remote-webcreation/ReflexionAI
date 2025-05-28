@@ -158,13 +158,6 @@ main {
             }
         }
 
-        section.active {
-            border: 2px solid rgb(136, 136, 234);
-            box-shadow: 0 0 4px var(--primary-color);
-            transition: all 3s ease;
-            
-        }
-
         section:focus-within {
             border: 2px solid rgb(136, 136, 234);
             box-shadow: 0 0 4px var(--primary-color);
@@ -199,8 +192,6 @@ main {
             font-size: 0.9em;
             color: #555;
         }
-
-
     }
     .lists-container {
         display: flex;
@@ -371,6 +362,10 @@ main {
         &:focus {
             box-shadow: 0px 0px 0px 3px rgba(99, 176, 136, 0.6), 0px 0px 10px rgba(99, 176, 136, 0.4);
         }
+    }
+
+    .primary-btn {
+        justify-self: center;
     }
     
     .contra-btn {

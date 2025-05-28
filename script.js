@@ -219,9 +219,9 @@ function updateArgumentProperty(id, type, prop, value) {
 }
 
 /**
- * Löscht ein Argument aus der Liste und dem DOM.
- * @param {string} id - Die ID des zu löschenden Arguments.
- * @param {string} type - 'pro' oder 'contra'.
+ * Löscht Argument aus der Liste & DOM.
+ * @param {string} id - ID des zu löschenden Arguments
+ * @param {string} type - 'pro' o. 'contra'.
  */
 function deleteArgument(id, type) {
     if (type === 'pro') {
@@ -442,6 +442,7 @@ function updateUIForPhase() {
         case 'reflection':
             document.getElementById('argument-input-section').style.display = 'none';
             startReflectionBtn.style.display = 'none';
+            document.getElementById('argument-lists-section').style.display = 'flex'; 
             reflectionInputSection.style.display = 'flex';
             break;
         case 'summary':
