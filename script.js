@@ -293,13 +293,13 @@ function calculateScores() {
         recommendationText = 'Starke Tendenz zu CONTRA!';
         overallRecommendationSpan.style.color = '#e74c3c'; // Rot
     } else if (scoreDifference > 5) {
-        recommendationText = 'Leichte Tendenz zu PRO.';
+        recommendationText = 'Leichte Tendenz zu PRO';
         overallRecommendationSpan.style.color = '#28a745'; // Dunkleres Grün
     } else if (scoreDifference < -5) {
-        recommendationText = 'Leichte Tendenz zu CONTRA.';
+        recommendationText = 'Leichte Tendenz zu CONTRA';
         overallRecommendationSpan.style.color = '#dc3545'; // Dunkleres Rot
     } else {
-        recommendationText = 'Ausgeglichen.';
+        recommendationText = 'Ausgeglichen';
         overallRecommendationSpan.style.color = '#f39c12'; // Orange
     }
     overallRecommendationSpan.textContent = recommendationText;

@@ -99,7 +99,7 @@ header {
         font-weight: 700;
         margin: 0;
         margin-right: 2rem;
-        color: rgb(183, 183, 239);
+        color: rgb(210, 210, 246);
     }
 }
 
@@ -148,7 +148,7 @@ main {
             .decision-display {
                 font-size: 1.2rem;
                 font-weight: bold;
-                color: #34495e;
+                color: #1c1c1c;
                 text-align: center;
                 margin-top: 15px;
                 padding: 10px 15px;
@@ -158,8 +158,21 @@ main {
             }
         }
 
+        section.active {
+            border: 2px solid rgb(136, 136, 234);
+            box-shadow: 0 0 4px var(--primary-color);
+            transition: all 3s ease;
+            
+        }
+
+        section:focus-within {
+            border: 2px solid rgb(136, 136, 234);
+            box-shadow: 0 0 4px var(--primary-color);
+            transition: all 3s ease;
+        }
+
         h2 {
-            color: rgb(165, 164, 164);
+            color: rgb(173, 173, 173);
         }
 
         /* Reflexions-Input-Bereich */
@@ -217,7 +230,8 @@ main {
                         flex-grow: 1;
                         margin-right: .625rem;
                         font-size: 1.05em;
-                        color: #444;
+                        color: #9288d9;
+                        font-weight: bold;
                     }
                     .actions {
                         display: flex;
@@ -250,7 +264,7 @@ main {
         flex-wrap: wrap;
         label {
             font-size: 0.9em;
-            color: #555;
+            color: #6c697d;
             white-space: nowrap; 
         }
     }
@@ -279,7 +293,7 @@ main {
         appearance: none;
         width: 1.125rem;
         height: 1.125rem;
-        background: #3498db;
+        background: var(--primary-color);
         border-radius: 50%;
         cursor: pointer;
         box-shadow: 0 1px 3px rgba(0,0,0,0.2);
@@ -369,7 +383,7 @@ main {
         }
     }
     .edit-btn {
-        background-color: #12d8b3;
+        background-color: #272728;
     }
 
     .delete-btn {
@@ -470,26 +484,39 @@ footer {
 
 @media (max-width: 767px) {
     body {
-        gap: 0.5rem; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
+    
     header {
         padding: 1rem; 
-        font-size: var(--font-size); 
-        h1 {
-            font-size: 1.2em; 
+        h2 {
+            font-size: .8em; 
+        } 
+        a {
+            h1 {
+                font-size: .85em; 
+            }
         }
     }
 
     main {
-        padding: 1.5rem; 
-        .container {
-            padding: 1rem; 
+        background-color: rgb(249, 246, 253);
+        padding: 1rem;
+        .container { 
             border-radius: 0; 
-            box-shadow: none; 
+            box-shadow: none;
+            border-radius: 1rem; 
+            background-color: transparent;
+            padding: 0;
             .section {
-                padding: 0.75rem; 
-                margin-bottom: 1rem; 
+                padding: 1rem; 
+                margin-bottom: 1rem;
+                background-color: rgb(228, 224, 239); 
+                border: 1px solid rgba(106, 105, 105, 0.665);
                 input[type="text"] {
                     width: 100%; 
                     padding: 0.5rem;
