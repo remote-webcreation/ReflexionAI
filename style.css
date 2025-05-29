@@ -381,11 +381,13 @@ main {
         justify-self: center;
     }
 
-    .secondary-btnn {
+    #restartBtn {
+        margin: 2rem 0 0 auto;
+        display: block;
         background-color: #2c2b36f2;
         color: var(--light-color);
         &:hover {
-            
+            background-color: var(--primary-color);
             border: none;
             color: var(--light-color);
         }

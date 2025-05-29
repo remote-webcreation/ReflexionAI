@@ -155,7 +155,8 @@ function addArgument(type) {
     argumentText.value = ''; 
     agentSays(`"${text}" als ${type === 'pro' ? 'Pro' : 'Contra'}-Argument hinzugefügt.`, isSpeechEnabled);
     calculateScores();
-    saveState(); 
+    saveState();
+    updateUIForPhase(); 
 }
 
 /**
@@ -286,8 +287,8 @@ function deleteArgument(id, type) {
     } else {
         agentSays(`${type === 'pro' ? 'Pro' : 'Contra'}-Argument wurde entfernt.`, isSpeechEnabled);
     }
-
     saveState();
+    updateUIForPhase();
 }
 
 /**
@@ -393,10 +394,13 @@ function askNextReflectionQuestion() {
             question = "Du hast einige Contra-Argumente, aber keine Pro-Argumente. Gibt es wirklich nichts Positives an der anderen Option?\nBitte versuche mindestens ein Pro-Argument zu finden.";
         } else if (contraLength === 0 && proLength > 0) {
             question = "Du hast viele Pro-Argumente, aber keine Contra-Argumente.\n Versuchen wir, auch mögliche Nachteile oder Risiken zu beleuchten.\nWas könnte schiefgehen oder unangenehm sein?";
-        } else if (proLength < 3 || contraLength < 3) {
-            question = "Deine Argumentenlisten sind noch etwas kurz.\nGibt es weitere Aspekte, die du berücksichtigen könntest? Denk an alle möglichen Folgen.";
-        } else {
+        } else if (
+            (proLength >= 1 && contraLength >= 2) ||
+            (proLength >= 2 && contraLength >= 1)
+        ) {
             question = "Du hast bereits einige Argumente gesammelt.\nWie fühlt sich die Tendenz der Entscheidung momentan für dich an? Passt sie zu deinem Bauchgefühl?";
+        } else {
+            question = "Deine Argumentenlisten sind noch etwas kurz.\nGibt es weitere Aspekte, die du berücksichtigen könntest? Denk an alle möglichen Folgen.";
         }
     }
     // Phase 2: Kognitive Verzerrungen & Nudging
@@ -428,7 +432,7 @@ function askNextReflectionQuestion() {
     }
     else {
         // Abschluss Reflexionsphase
-        question = "Wir haben viele Aspekte beleuchtet. Nimm dir einen Moment Zeit, um über alles nachzudenken, was wir besprochen haben.\nWas ist dein Fazit aus dieser Reflexion?";
+        question = "Wir haben viele Aspekte beleuchtet. Nimm dir einen Moment Zeit, um über alles nachzudenken.\nWas ist dein Fazit aus dieser Reflexion?\nWenn du soweit bist, klicke oben auf 'Zusammenfassung anzeigen', um deine Ergebnisse zu sehen.";
         reflectionInputSection.style.display = 'none';
         showSummaryBtn.style.display = 'block';
     }
@@ -470,7 +474,7 @@ function submitReflectionAnswer() {
 /**
  * Aktualisiert UI basierend auf aktueller Phase des Agent
  */
-function updateUIForPhase() {
+function updateUIForPhase() {   
     // document.querySelectorAll('.section').forEach(sec => sec.style.display = 'block');
     reflectionInputSection.style.display = 'none';
     showSummaryBtn.style.display = 'none';
@@ -487,15 +491,29 @@ function updateUIForPhase() {
             document.getElementById('argument-input-section').style.display = 'block';
             document.getElementById('argument-lists-section').style.display = 'flex'; 
             document.getElementById('analysis-section').style.display = 'block';
-            startReflectionBtn.style.display = 'block';
+            const proLenCA = proArguments.length;
+            const contraLenCA = contraArguments.length;
+            const hint = document.getElementById('argument-hint');
+            if (
+                (proLenCA + contraLenCA < 3) ||
+                !(
+                    (proLenCA >= 1 && contraLenCA >= 2) ||
+                    (proLenCA >= 2 && contraLenCA >= 1)
+                )
+            ) {
+                hint.style.display = 'block';
+                startReflectionBtn.style.display = 'none';
+            } else {
+                hint.style.display = 'none';
+                startReflectionBtn.style.display = 'block';
+            }
             break;
         case 'reflection':
             const proLen = proArguments.length;
             const contraLen = contraArguments.length;
             // Mindestens (1 Pro & 2 Contra) ODER (1 Contra & 2 Pro)
             if (
-                (proLen >= 1 && contraLen >= 2) ||
-                (contraLen >= 1 && proLen >= 2)
+                !((proLen >= 1 && contraLen >= 2) || (contraLen >= 1 && proLen >= 2))
             ) {
                 document.getElementById('argument-input-section').style.display = 'block';
             } else {
