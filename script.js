@@ -37,7 +37,7 @@ let currentPhase = 'decision_input'; // Phasen: 'decision_input', 'collecting_ar
 let reflectionQuestionsAsked = 0; 
 let userReflectionAnswers = [];
 let isSpeechEnabled = false;
-speechToggle.checked = false; // Standardmäßig deaktiviert
+speechToggle.checked = false;
 
 document.addEventListener('DOMContentLoaded', loadState);
 
@@ -50,7 +50,7 @@ submitReflectionBtn.addEventListener('click', submitReflectionAnswer);
 showSummaryBtn.addEventListener('click', showSummary);
 speechToggle.addEventListener('change', () => {
     isSpeechEnabled = speechToggle.checked;
-    agentSays(`Sprachausgabe ${isSpeechEnabled ? 'aktiviert' : 'deaktiviert'}.`);
+    agentSays(`Sprachausgabe ${isSpeechEnabled ? 'aktiviert' : 'deaktiviert'}.`, true);
 });
 
 
@@ -83,8 +83,8 @@ function setDecision() {
         decisionInput.value = '';
         agentSays(`Okay, die Entscheidung lautet: "${currentDecision}". Lass uns jetzt Pro- und Contra-Argumente sammeln. Was spricht dafür oder dagegen?`, true);
         currentPhase = 'collecting_args';
-        updateUIForPhase(); // UI anpassen
-        saveState(); // Zustand speichern
+        updateUIForPhase();
+        saveState();
     } else {
         agentSays('Bitte gib zuerst deine Entscheidung ein, damit ich dir helfen kann.', true);
     }
@@ -258,9 +258,19 @@ function updateArgumentProperty(id, type, prop, value) {
  * @param {string} type - 'pro' o. 'contra'.
  */
 function deleteArgument(id, type) {
+    let removedArgumentName = '';
+
     if (type === 'pro') {
+        const argToRemove = proArguments.find(arg => arg.id === id);
+        if (argToRemove) {
+            removedArgumentName = argToRemove.name;
+        }
         proArguments = proArguments.filter(arg => arg.id !== id);
     } else {
+       const argToRemove = contraArguments.find(arg => arg.id === id);
+        if (argToRemove) {
+            removedArgumentName = argToRemove.name;
+        }
         contraArguments = contraArguments.filter(arg => arg.id !== id);
     }
     const listItem = document.querySelector(`li[data-id="${id}"]`);
@@ -270,8 +280,14 @@ function deleteArgument(id, type) {
     updateCount(proCountSpan, proArguments.length);
     updateCount(contraCountSpan, contraArguments.length);
     calculateScores(); // Scores neu berechnen
-    agentSays(`Ein ${type === 'pro' ? 'Pro' : 'Contra'}-Argument wurde entfernt.`, isSpeechEnabled);
-    saveState(); // Zustand speichern
+    
+    if (removedArgumentName) {
+        agentSays(`Das ${type === 'pro' ? 'Pro' : 'Contra'}-Argument "${removedArgumentName}" wurde entfernt.`, isSpeechEnabled);
+    } else {
+        agentSays(`${type === 'pro' ? 'Pro' : 'Contra'}-Argument wurde entfernt.`, isSpeechEnabled);
+    }
+
+    saveState();
 }
 
 /**
@@ -474,7 +490,17 @@ function updateUIForPhase() {
             startReflectionBtn.style.display = 'block';
             break;
         case 'reflection':
-            document.getElementById('argument-input-section').style.display = 'none';
+            const proLen = proArguments.length;
+            const contraLen = contraArguments.length;
+            // Mindestens (1 Pro & 2 Contra) ODER (1 Contra & 2 Pro)
+            if (
+                (proLen >= 1 && contraLen >= 2) ||
+                (contraLen >= 1 && proLen >= 2)
+            ) {
+                document.getElementById('argument-input-section').style.display = 'block';
+            } else {
+                document.getElementById('argument-input-section').style.display = 'none';
+            }
             startReflectionBtn.style.display = 'none';
             document.getElementById('argument-lists-section').style.display = 'flex'; 
             reflectionInputSection.style.display = 'flex';
@@ -499,18 +525,22 @@ function agentSays(message, speak = false) {
     agentChat.appendChild(messageElement);
     agentChat.scrollTop = agentChat.scrollHeight;
 
-    if (speak && isSpeechEnabled && 'speechSynthesis' in window) {
+    if (speak && isSpeechEnabled && typeof responsiveVoice !== 'undefined' && responsiveVoice.speak) {
+        console.log("Versuche Sprachausgabe für:", message);
+        console.log("isSpeechEnabled:", isSpeechEnabled);
+        console.log("responsiveVoice verfügbar:", typeof responsiveVoice !== 'undefined');
         setTimeout(() => {
-            const utterance = new SpeechSynthesisUtterance(message);
-            utterance.lang = 'de-DE'; // Sprache auf Deutsch
-            // Opt. Einst. für Stimme (kann je nach Browser variieren)
-            const voices = window.speechSynthesis.getVoices();
-            const preferredVoice = voices.find(voice => voice.lang === 'de-DE' && voice.name.includes('Google')); 
-            if (preferredVoice) {
-                utterance.voice = preferredVoice;
-            }
-            window.speechSynthesis.speak(utterance);
+            responsiveVoice.speak(message, 'Deutsch Male', {
+                rate: 0.8,      // Sprechgeschwindigkeit (normal)
+                pitch: 1,     // Tonhöhe (1 normal)
+                volume: 1     // Lautstärke (1 max.)
+            });
         }, 100); 
+    } else {
+        console.log("Sprachausgabe nicht aktiv oder responsiveVoice nicht bereit.");
+        console.log("speak Parameter:", speak);
+        console.log("isSpeechEnabled:", isSpeechEnabled);
+        console.log("responsiveVoice verfügbar:", typeof responsiveVoice !== 'undefined');
     }
 }
 

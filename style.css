@@ -225,7 +225,8 @@ main {
                     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
                     transition: transform 0.2s ease, box-shadow 0.2s ease;
                     .argument-text {
-                        flex-grow: 1;
+                        width: 100%;
+                        word-break: break-word;
                         margin-right: .625rem;
                         font-size: 1.05em;
                         color: #9288d9;
@@ -233,8 +234,10 @@ main {
                     }
                     .actions {
                         display: flex;
+                        justify-content: flex-end;
                         gap: .5rem;
                         margin-top: .3125rem;
+                        width: 100%;
                         button {
                             padding: .3125rem .625rem;
                             font-size: 0.8rem;
@@ -268,7 +271,7 @@ main {
     }
 
     .weight-input, .impact-input {
-        flex-grow: 1; 
+        flex: 1 1 120px; 
         min-width: 5rem;
     }
 
@@ -413,20 +416,20 @@ main {
 
     /* Chat Fenster */
     .chat-section {
-        background-color: #f7fcff;
+        background-color: #f9fdff;
         .chat-window {
-            border: 1px solid #ddd;
+            border: 1px solid rgb(182, 182, 214);
             border-radius: .5rem;
             padding: .9375rem;
             max-height: 15.625rem;
             overflow-y: auto;
-            background-color: #e9eaef;
+            background-color: #cec8e9;
             display: flex;
             flex-direction: column;
             gap: .625rem;
             .agent-message {
-                background-color: #d1ecf1;
-                color: #0c5460;
+                background-color: #43454a;
+                color: #d9e6e8;
                 padding: .625rem .9375rem;
                 border-radius: .9375rem;
                 margin-bottom: .625rem;
@@ -436,8 +439,8 @@ main {
                 font-size: 0.95em;
             }
             .user-message {
-                background-color: #cce5ff;
-                color: #004085;
+                background-color: #f7f4f4;
+                color: #3a3b3d;
                 padding: .625rem .9375rem;
                 border-radius: 9375rem;
                 margin-bottom: .625rem;
@@ -449,7 +452,8 @@ main {
             }
             .agent-intro {
                 font-style: italic;
-                color: #444;
+                background-color: #5a4faf;
+                color: whitesmoke;
             }
         }
     }
@@ -522,7 +526,7 @@ footer {
     }
 
     main {
-        background-color: rgb(249, 246, 253);
+        background-color: rgb(247, 245, 248);
         padding: 1rem;
         .container { 
             border-radius: 0; 
@@ -533,7 +537,7 @@ footer {
             .section {
                 padding: 1rem; 
                 margin-bottom: 1rem;
-                background-color: rgb(228, 224, 239); 
+                background-color: rgb(236, 234, 239); 
                 border: 1px solid rgba(106, 105, 105, 0.665);
                 input[type="text"] {
                     width: 100%; 
@@ -542,10 +546,19 @@ footer {
             }
 
             .lists-container {
-                flex-direction: column; 
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem; 
             }
                 .list-column {
                     margin-bottom: 1.25rem;
+                    width: 100%;
+                    border: 1px solid rgb(193, 194, 202);
+                    li {
+                        flex-wrap: wrap;
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
                 }
             }
             
@@ -589,8 +602,7 @@ footer {
         }
     }
     main {
-        padding: .5rem;
-        /* background-color: rgb(28, 27, 27); */
+        padding: 1rem;
         .container {
             padding: 0.75rem;
             .section {
