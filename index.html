@@ -40,12 +40,12 @@
 
             <section class="lists-container section" id="argument-lists-section">
                 <div class="list-column pro-list-column">
-                    <h3>Pro-Argumente (<span id="proCount">0</span>)</h3>
+                    <h3 id="proHeader">Pro-Argumente (<span id="proCount">0</span>)</h3>
                     <ul id="proList" class="argument-list">
                     </ul>
                 </div>
                 <div class="list-column contra-list-column" id="argument-lists-section">
-                    <h3>Contra-Argumente (<span id="contraCount">0</span>)</h3>
+                    <h3 id="contraHeader">Contra-Argumente (<span id="contraCount">0</span>)</h3>
                     <ul id="contraList" class="argument-list">
                     </ul>
                 </div>
@@ -57,6 +57,12 @@
                     <p>Pro-Score: <span id="proScore">0</span></p>
                     <p>Contra-Score: <span id="contraScore">0</span></p>
                     <p class="recommendation">Tendenz: <span id="overallRecommendation">Ausgeglichen</span></p>
+                </div>
+                <div id="analysis-argument-hint" class="up-text">
+                    <p id="analysis-argument-hint-text" style="color:#111; font-weight:bold; margin-top:1rem; margin-bottom:0;">
+                    * Wähle mindestens 3 Argumente, um fortzufahren!
+                    </p>
+                    <i class="fa-solid fa-arrow-up fa-2xs"></i>
                 </div>
                 <button id="startReflectionBtn" class="primary-btn">Starte die Reflexion</button>
                 <button id="showSummaryBtn" class="secondary-btn" style="display: none;">Zusammenfassung anzeigen</button>

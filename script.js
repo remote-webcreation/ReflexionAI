@@ -494,6 +494,7 @@ function updateUIForPhase() {
             const proLenCA = proArguments.length;
             const contraLenCA = contraArguments.length;
             const hint = document.getElementById('argument-hint');
+            const analysisHint = document.getElementById('analysis-argument-hint');
             if (
                 (proLenCA + contraLenCA < 3) ||
                 !(
@@ -502,11 +503,19 @@ function updateUIForPhase() {
                 )
             ) {
                 hint.style.display = 'block';
+                analysisHint.style.display = 'flex';
                 startReflectionBtn.style.display = 'none';
             } else {
                 hint.style.display = 'none';
+                analysisHint.style.display = 'none';
                 startReflectionBtn.style.display = 'block';
             }
+            // Klick-Event für Scroll
+            analysisHint.onclick = () => {
+                document.getElementById('argument-input-section').scrollIntoView({ behavior: 'smooth' });
+            };
+            document.getElementById('proHeader').style.color = '#27ae60';
+            document.getElementById('contraHeader').style.color = '#e74c3c';
             break;
         case 'reflection':
             const proLen = proArguments.length;
