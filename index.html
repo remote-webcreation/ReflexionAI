@@ -23,7 +23,10 @@
             <section class="section" id="decision-section" tabindex="-1">
                 <h2>Worum geht es bei deiner Entscheidung?</h2>
                 <input type="text" id="decisionInput" placeholder="Z.B. Soll ich den Job wechseln?" aria-label="Deine Entscheidung">
-                <button id="setDecisionBtn">Entscheidung festlegen</button>
+                <div class="top-menu" style="display: flex; gap: 1rem; align-items: center;">
+                    <button id="setDecisionBtn">Entscheidung festlegen</button>
+                    <button id="startReflectionBtnTop" class="primary-btn" style="display: none;">Starte die Reflection</button>
+                </div>
                 <p id="currentDecision" class="decision-display"></p>
             </section>
 
@@ -52,7 +55,7 @@
             </section>
 
             <section class="section" id="analysis-section">
-                <h2>Analyse & Reflexion</h2>
+                <h2>Analyse & Reflection</h2>
                 <div class="scores-display">
                     <p>Pro-Score: <span id="proScore">0</span></p>
                     <p>Contra-Score: <span id="contraScore">0</span></p>
@@ -64,7 +67,7 @@
                     </p>
                     <i class="fa-solid fa-arrow-up fa-2xs"></i>
                 </div>
-                <button id="startReflectionBtn" class="primary-btn">Starte die Reflexion</button>
+                <button id="startReflectionBtn" class="primary-btn" style="display: none;">Starte die Reflection</button>
                 <button id="showSummaryBtn" class="secondary-btn" style="display: none;">Zusammenfassung anzeigen</button>
             </section>
 

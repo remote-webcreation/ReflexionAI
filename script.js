@@ -20,6 +20,7 @@ const contraScoreSpan = document.getElementById('contraScore');
 const overallRecommendationSpan = document.getElementById('overallRecommendation');
 
 const startReflectionBtn = document.getElementById('startReflectionBtn');
+const startReflectionBtnTop = document.getElementById('startReflectionBtnTop');
 const showSummaryBtn = document.getElementById('showSummaryBtn');
 
 const agentChat = document.getElementById('agentChat');
@@ -45,7 +46,14 @@ document.addEventListener('DOMContentLoaded', loadState);
 setDecisionBtn.addEventListener('click', setDecision);
 addProBtn.addEventListener('click', () => addArgument('pro'));
 addContraBtn.addEventListener('click', () => addArgument('contra'));
-startReflectionBtn.addEventListener('click', startReflectionPhase);
+startReflectionBtn.addEventListener('click', () => {
+    startReflectionPhase();
+    document.querySelector('.chat-section').scrollIntoView({ behavior: 'smooth' });
+});
+startReflectionBtnTop.addEventListener('click', () => {
+    startReflectionPhase();
+    document.querySelector('.chat-section').scrollIntoView({ behavior: 'smooth' });
+});
 submitReflectionBtn.addEventListener('click', submitReflectionAnswer);
 showSummaryBtn.addEventListener('click', showSummary);
 speechToggle.addEventListener('change', () => {
@@ -504,11 +512,13 @@ function updateUIForPhase() {
             ) {
                 hint.style.display = 'block';
                 analysisHint.style.display = 'flex';
-                startReflectionBtn.style.display = 'none';
+                if (startReflectionBtn) startReflectionBtn.style.display = 'none';
+                if (startReflectionBtnTop) startReflectionBtnTop.style.display = 'none';
             } else {
                 hint.style.display = 'none';
                 analysisHint.style.display = 'none';
-                startReflectionBtn.style.display = 'block';
+                if (startReflectionBtn) startReflectionBtn.style.display = 'block';
+            if (startReflectionBtnTop) startReflectionBtnTop.style.display = 'inline-block';
             }
             // Klick-Event für Scroll
             analysisHint.onclick = () => {
@@ -687,7 +697,7 @@ function loadState() {
 
         speechToggle.checked = isSpeechEnabled;
         updateUIForPhase();
-        agentSays("Willkommen zurück! Ich habe deine letzte Sitzung geladen.", true);
+        agentSays("Hi! Ich habe deine letzte Sitzung geladen.", true);
         // Falls Reflexion lief, letzte Frage erneut stellen
         if (currentPhase === 'reflection' && reflectionQuestionsAsked > 0) {
             askNextReflectionQuestion();
