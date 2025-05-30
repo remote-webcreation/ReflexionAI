@@ -2,8 +2,42 @@ const decisionInput = document.getElementById('decisionInput');
 const setDecisionBtn = document.getElementById('setDecisionBtn');
 const currentDecisionDisplay = document.getElementById('currentDecision');
 const restartBtn = document.getElementById('restartBtn');
+const saveSessionBtn = document.getElementById('saveSessionBtn');
+const loadSessionBtn = document.getElementById('loadSessionBtn');
+
+function updateLoadSessionBtnVisibility() {
+    if (localStorage.getItem('kognitionsCoachState')) {
+        loadSessionBtn.style.display = 'inline-block';
+    } else {
+        loadSessionBtn.style.display = 'none';
+    }
+}
+
+// Direkt beim Laden prüfen
+updateLoadSessionBtnVisibility();
+
+// Nach jd. Speichern auch prüfen
+if (saveSessionBtn) {
+    saveSessionBtn.addEventListener('click', () => {
+        saveState();
+        agentSays("Deine Sitzung wurde gespeichert.", true);
+        updateLoadSessionBtnVisibility();
+    });
+}
+
 if (restartBtn) {
     restartBtn.addEventListener('click', restartApp);
+}
+
+if (saveSessionBtn) {
+    saveSessionBtn.addEventListener('click', () => {
+        saveState();
+        agentSays("Deine Sitzung wurde gespeichert.", true);
+    });
+}
+
+if (loadSessionBtn) {
+    loadSessionBtn.addEventListener('click', loadState);
 }
 
 const argumentText = document.getElementById('argumentText');
@@ -39,8 +73,6 @@ let reflectionQuestionsAsked = 0;
 let userReflectionAnswers = [];
 let isSpeechEnabled = false;
 speechToggle.checked = false;
-
-document.addEventListener('DOMContentLoaded', loadState);
 
 // Event Listener für Buttons
 setDecisionBtn.addEventListener('click', setDecision);
@@ -92,7 +124,10 @@ function setDecision() {
         agentSays(`Okay, die Entscheidung lautet: "${currentDecision}". Lass uns jetzt Pro- und Contra-Argumente sammeln. Was spricht dafür oder dagegen?`, true);
         currentPhase = 'collecting_args';
         updateUIForPhase();
-        saveState();
+        if (saveSessionBtn) {
+            saveSessionBtn.style.display = 'inline-block';
+            saveSessionBtn.disabled = false;
+        }
     } else {
         agentSays('Bitte gib zuerst deine Entscheidung ein, damit ich dir helfen kann.', true);
     }
@@ -121,8 +156,11 @@ function restartApp() {
         overallRecommendationSpan.textContent = 'Ausgeglichen';
         overallRecommendationSpan.style.color = '#f39c12';
         agentChat.innerHTML = '';
+
+        if (saveSessionBtn) saveSessionBtn.disabled = true;
         updateUIForPhase();
         agentSays("Alles wurde zurückgesetzt. Du kannst jetzt von vorne beginnen.", true);
+        updateLoadSessionBtnVisibility();
     }
 }
 
@@ -163,7 +201,6 @@ function addArgument(type) {
     argumentText.value = ''; 
     agentSays(`"${text}" als ${type === 'pro' ? 'Pro' : 'Contra'}-Argument hinzugefügt.`, isSpeechEnabled);
     calculateScores();
-    saveState();
     updateUIForPhase(); 
 }
 
@@ -257,7 +294,6 @@ function updateArgumentProperty(id, type, prop, value) {
     if (argument) {
         argument[prop] = value;
         calculateScores();
-        saveState();
     }
 }
 
@@ -295,7 +331,6 @@ function deleteArgument(id, type) {
     } else {
         agentSays(`${type === 'pro' ? 'Pro' : 'Contra'}-Argument wurde entfernt.`, isSpeechEnabled);
     }
-    saveState();
     updateUIForPhase();
 }
 
@@ -317,7 +352,6 @@ function editArgument(id, type) {
                 listItemTextSpan.textContent = argumentToEdit.text;
                 agentSays('Ein Argument wurde bearbeitet.', isSpeechEnabled);
             }
-            saveState(); 
         }
     }
 }
@@ -472,8 +506,7 @@ function submitReflectionAnswer() {
             agentSays("Vielen Dank für deine Antworten. Ich hoffe, diese Reflexion hat dir geholfen.\nDu kannst jetzt die Zusammenfassung anzeigen lassen, indem du oben auf den Button klickst.", isSpeechEnabled);
             reflectionInputSection.style.display = 'none';
             showSummaryBtn.style.display = 'block';
-        }
-        saveState(); 
+        } 
     } else {
         agentSays('Bitte gib eine Antwort ein, um fortzufahren.', isSpeechEnabled);
     }
@@ -664,8 +697,6 @@ function showSummary() {
     summaryText += `<p>Ich hoffe, diese Betrachtung hat dir geholfen, Klarheit in deiner Entscheidung zu finden.\n Denk dran, dies ist ein Werkzeug zur Unterstützung und die endgültige Entscheidung liegt bei dir.</p>`;
 
     agentSays(summaryText, isSpeechEnabled);
-
-    saveState();
 }
 
 /**

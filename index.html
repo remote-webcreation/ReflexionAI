@@ -19,13 +19,18 @@
     <main>
 
         <div class="container">
+            <div class="session-buttons">
+                <button id="saveSessionBtn" class="secondary-btn" style="display:none;" 
+                disabled>Sitzung speichern</button>
+                <button id="loadSessionBtn" class="secondary-btn">Vorherige Sitzung laden</button>
+            </div>
 
             <section class="section" id="decision-section" tabindex="-1">
                 <h2>Worum geht es bei deiner Entscheidung?</h2>
                 <input type="text" id="decisionInput" placeholder="Z.B. Soll ich den Job wechseln?" aria-label="Deine Entscheidung">
                 <div class="top-menu" style="display: flex; gap: 1rem; align-items: center;">
                     <button id="setDecisionBtn">Entscheidung festlegen</button>
-                    <button id="startReflectionBtnTop" class="primary-btn" style="display: none;">Starte die Reflection</button>
+                    <button id="startReflectionBtnTop" class="primary-btn" style="display: none;">Starte Reflection</button>
                 </div>
                 <p id="currentDecision" class="decision-display"></p>
             </section>
@@ -33,8 +38,10 @@
             <section class="argument-input-section section" id="argument-input-section">
                 <h2>Pro- & Contra-Argumente</h2>
                 <input type="text" id="argumentText" placeholder="Argument hier eingeben..." aria-label="Argument">
-                <button id="addProBtn" class="pro-btn">Pro hinzufügen</button>
-                <button id="addContraBtn" class="contra-btn">Contra hinzufügen</button>
+                <div class="pro-co-btn">
+                    <button id="addProBtn" class="pro-btn">Pro hinzufügen</button>
+                    <button id="addContraBtn" class="contra-btn">Contra hinzufügen</button>
+                </div>
                 <p id="argument-hint" class="argument-hint" style="margin-top:1rem; color:#9379da;
                 font-weight: bold; font-size:1rem; display:none;">
                     * Wähle mindestens 3 Argumente, um fortzufahren!
@@ -59,7 +66,7 @@
                 <div class="scores-display">
                     <p>Pro-Score: <span id="proScore">0</span></p>
                     <p>Contra-Score: <span id="contraScore">0</span></p>
-                    <p class="recommendation">Tendenz: <span id="overallRecommendation">Ausgeglichen</span></p>
+                    <p class="recommendation">Tendenz: <br> <span class="overall" id="overallRecommendation">Ausgeglichen</span></p>
                 </div>
                 <div id="analysis-argument-hint" class="up-text">
                     <p id="analysis-argument-hint-text" style="color:#111; font-weight:bold; margin-top:1rem; margin-bottom:0;">
@@ -67,7 +74,7 @@
                     </p>
                     <i class="fa-solid fa-arrow-up fa-2xs"></i>
                 </div>
-                <button id="startReflectionBtn" class="primary-btn" style="display: none;">Starte die Reflection</button>
+                <button id="startReflectionBtn" class="primary-btn" style="display: none;">Starte Reflection</button>
                 <button id="showSummaryBtn" class="secondary-btn" style="display: none;">Zusammenfassung anzeigen</button>
             </section>
 
@@ -89,6 +96,7 @@
             </section>
 
             <button id="restartBtn" class="restart-btn-row">Neu starten</button>
+
         </div>
     </main>
 
